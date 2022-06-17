@@ -934,14 +934,9 @@ function imagenDiagram(diagA) {
         allN = intersectionBig(inN);
         inN = differenceBig(inN, allN);    
     };    
-    var cSub = Math.max(...colorIN);
-    if(cSub<=0){
-        cSub = colorIN.reduce(function(a, b){ return a + b;}, 0);
-        cSub = cSub/inN.length;
-    };
     var diagIm = {
         colorD: negativeColor(diagA.colorD),
-        colorS: cSub,
+        colorS: getColorSubFromIn(colorIN),
         colorI: colorIN,
         sub: diagA.sub,
         all: allN,
