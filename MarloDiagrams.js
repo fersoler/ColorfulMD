@@ -918,6 +918,9 @@ function negativeColor(c){
 function imagenDiagram(diagA) {
     var allN = [];
     var inN = [];
+    if(diagA.colorS == 0){
+        return void (0);
+    };
     var colorIN = diagA.colorI.map(x => negativeColor(x));
     // join old all with old in
     var provIN = diagA.in.map(x => union(diagA.all, x));
@@ -1034,18 +1037,10 @@ function conversion(diagA, prop) {
                     union(x, diagA.all).indexOf(prop) == -1).map(x =>
                         unionBig([x, diagA.all, [diagA.sub]])))),
             union(A, unionBig(I)));
-        var cS;
-        // Color del sujeto, máximo de las apariciones que 
-        // tenía en el diagrama original. ¿Es así?
-        if(diagA.all.indexOf(prop) != -1){
-            cS = Math.max(...diagA.colorI);
-        } else {
-            cS = Math.max(...cI);
-        };
         var diagB = {
             // Mismo color del diagrama que el original
             colorD: diagA.colorD,
-            colorS: cS,
+            colorS: getColorSubFromIn(cI),
             colorI: cI,
             sub: prop,
             all: A,
